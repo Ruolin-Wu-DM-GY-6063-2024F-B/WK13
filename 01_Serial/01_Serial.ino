@@ -1,9 +1,17 @@
+int lastSend;
+
 void setup() {
   Serial.begin(9600);
+  lastSend = 0;
 }
 
 void loop() {
   int a0Val = analogRead(A0);
-  Serial.println(a0Val);
+
+  if (millis()- lastSend > 50){
+    Serial.println(a0Val);
+    lastSend = millis();
+  }
+  // Serial.println(a0Val);
   delay(2);
 }
